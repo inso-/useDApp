@@ -11,9 +11,9 @@ import { AccountButton } from '../components/account/AccountButton'
 const STAKING_CONTRACT = '0x00000000219ab540356cBB839Cbe05303d7705Fa'
 
 export function Balance() {
-  const { account } = useEthers()
-  const userBalance = useEtherBalance(account)
-  const stakingBalance = useEtherBalance(STAKING_CONTRACT)
+  const { account, chainId } = useEthers()
+  const userBalance = useEtherBalance(account, { chainId })
+  const stakingBalance = useEtherBalance(STAKING_CONTRACT, { chainId })
 
   return (
     <MainContent>
@@ -32,12 +32,13 @@ export function Balance() {
             )}
             {account && (
               <ContentRow>
-                <Label>Account:</Label> <TextInline>{account}</TextInline>
+                <Label>Account:</Label> <TextInline id="balance-page-account">{account}</TextInline>
               </ContentRow>
             )}
             {userBalance && (
               <ContentRow>
-                <Label>Ether balance:</Label> <TextInline>{formatEther(userBalance)}</TextInline> <Label>ETH</Label>
+                <Label>Ether balance:</Label>{' '}
+                <TextInline id="balance-page-balance">{formatEther(userBalance)}</TextInline> <Label>ETH</Label>
               </ContentRow>
             )}
           </ContentBlock>

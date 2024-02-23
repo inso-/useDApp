@@ -13,7 +13,11 @@
   },
   "include": [
     "src",
-    "src/**/*.json",
-    "test"
+    "src/**/*.json"
+  ],
+  "references": [
+    {
+      "path": "../core"
+    }
   ]
 }

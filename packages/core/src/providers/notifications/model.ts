@@ -1,7 +1,7 @@
-import { TransactionReceipt, TransactionResponse } from '@ethersproject/abstract-provider'
-import { ChainId } from '../../constants'
+import type { TransactionReceipt, TransactionRequest, TransactionResponse } from '@ethersproject/abstract-provider'
 
 type NotificationPayload = { submittedAt: number } & (
+  | { type: 'transactionPendingSignature'; transactionName?: string; transactionRequest?: TransactionRequest }
   | { type: 'transactionStarted'; transaction: TransactionResponse; transactionName?: string }
   | {
       type: 'transactionSucceed'
@@ -23,17 +23,20 @@ type NotificationPayload = { submittedAt: number } & (
 export type Notification = { id: string } & NotificationPayload
 
 export type AddNotificationPayload = {
-  chainId: ChainId
+  chainId: number
   notification: NotificationPayload
 }
 
 export type RemoveNotificationPayload = {
-  chainId: ChainId
+  chainId: number
   notificationId: string
 }
 
 export type Notifications = {
-  [T in ChainId]?: Notification[]
+  [chainId: number]: Notification[]
 }
 
+/**
+ * @internal Intended for internal use - use it on your own risk
+ */
 export const DEFAULT_NOTIFICATIONS: Notifications = {}

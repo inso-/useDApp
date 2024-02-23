@@ -1,31 +1,47 @@
-import { useWeb3React } from '@web3-react/core'
-import { Web3Provider } from '@ethersproject/providers'
-import { ChainId } from '../constants'
-import { useCallback } from 'react'
-import { useConfig } from '../providers/config/context'
-import { InjectedConnector } from '@web3-react/injected-connector'
+import { useConnector } from '../providers/network/connectors'
+import { Web3Ethers } from '../providers/network/connectors/context'
 
-type ActivateBrowserWallet = (onError?: (error: Error) => void, throwErrors?: boolean) => void
-
-export type Web3Ethers = ReturnType<typeof useWeb3React> & {
-  library?: Web3Provider
-  chainId?: ChainId
-  activateBrowserWallet: ActivateBrowserWallet
-}
-
+/**
+ * Returns connection state and functions that allow to manipulate the state.
+ * **Requires**: `<ConfigProvider>`
+ * 
+ * @public
+ * @returns {} Object with the following:
+    - `account: string` - current user account (or *undefined* if not connected)
+    - `chainId: ChainId` - current chainId (or *undefined* if not connected)
+    - `library: Web3Provider` - an instance of ethers [Web3Provider](https://github.com/TrueFiEng/useDApp/tree/master/packages/example) (or `undefined` if not connected)
+    - `active: boolean` - returns if provider is connected (read or write mode)
+    - `activateBrowserWallet()` - function that will initiate connection to browser web3 extension (e.g. Metamask)
+    - `async activate(connector: AbstractConnector, onError?: (error: Error) => void, throwErrors?: boolean)` - function that allows to connect to a wallet
+    - `async deactivate()` - function that disconnects wallet
+    - `error?: Error` - an error that occurred during connecting (e.g. connection is broken, unsupported network)
+ */
 export function useEthers(): Web3Ethers {
-  const result = useWeb3React<Web3Provider>()
-  const { networks } = useConfig()
-  const activateBrowserWallet = useCallback<ActivateBrowserWallet>(
-    async (onError, throwErrors) => {
-      const injected = new InjectedConnector({ supportedChainIds: networks?.map((network) => network.chainId) })
-      if (onError instanceof Function) {
-        await result.activate(injected, onError, throwErrors)
-      } else {
-        await result.activate(injected, undefined, throwErrors)
-      }
-    },
-    [networks]
-  )
-  return { ...result, activateBrowserWallet }
+  const {
+    account,
+    library,
+    chainId,
+    active,
+    activate,
+    activateBrowserWallet,
+    deactivate,
+    setError,
+    error,
+    isLoading,
+    switchNetwork,
+  } = useConnector()
+
+  return {
+    account,
+    library,
+    chainId,
+    active,
+    activate,
+    activateBrowserWallet,
+    deactivate,
+    setError,
+    error,
+    isLoading,
+    switchNetwork,
+  }
 }

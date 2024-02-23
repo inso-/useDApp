@@ -1,5 +1,85 @@
 # @usedapp/example
 
+## 0.5.3
+
+### Patch Changes
+
+- 28287db: 🔝 Update ethers to 5.6.2
+- Updated dependencies [c46b2a1]
+- Updated dependencies [669c1fa]
+- Updated dependencies [0d2368a]
+- Updated dependencies [2529256]
+- Updated dependencies [28287db]
+  - @usedapp/core@1.0.0
+  - @usedapp/coingecko@1.0.0
+
+## 0.5.2
+
+### Patch Changes
+
+- Updated dependencies [2e4b152]
+- Updated dependencies [3d4cf2c]
+- Updated dependencies [28afc72]
+  - @usedapp/core@0.12.9
+  - @usedapp/coingecko@0.5.1
+
+## 0.5.1
+
+### Patch Changes
+
+- Updated dependencies [73a9bec]
+- Updated dependencies [e2d9950]
+- Updated dependencies [2d7b1ec]
+- Updated dependencies [0fd73d1]
+- Updated dependencies [7d4d28b]
+  - @usedapp/coingecko@0.5.0
+  - @usedapp/core@0.12.8
+
+## 0.5.0
+
+### Minor Changes
+
+- 378177c: Fetching state from multiple chains simultaneously
+
+### Patch Changes
+
+- 42e1adc: 🔧 Add typed contract calls
+- e9907a5: Add support for wallet-connect provider
+- ad021b0: Use pnpm instead of yarn
+- Updated dependencies [378177c]
+- Updated dependencies [42e1adc]
+- Updated dependencies [ca55dd0]
+- Updated dependencies [d70b866]
+- Updated dependencies [e9907a5]
+- Updated dependencies [ad021b0]
+  - @usedapp/core@0.12.0
+  - @usedapp/coingecko@0.4.4
+
+## 0.4.1
+
+### Patch Changes
+
+- Updated dependencies [3d1ec30]
+- Updated dependencies [0029496]
+  - @usedapp/core@0.11.0
+  - @usedapp/coingecko@0.4.3
+
+## 0.4.0
+
+### Minor Changes
+
+- fd8e924: Remove @web3-react dependency, introduce own way of provider management
+
+### Patch Changes
+
+- c70a76e: Support EIP-1193 providers and legacy web3-react connectors
+- be413b4: Fix peer dependency conflict:
+  - update @pmmmwh/react-refresh-webpack-plugin
+- Updated dependencies [c70a76e]
+- Updated dependencies [fd8e924]
+  - @usedapp/core@0.10.0
+  - @usedapp/coingecko@0.4.2
+
 ## 0.3.1
 
 ### Patch Changes
